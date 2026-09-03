@@ -1,0 +1,213 @@
+// Generated schema — modeled after beautyhqio conventions.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  role         Role     @default(ANALYST)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  ANALYST
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  actorName String?
+  action    String
+  entity    String
+  entityId  String?
+  detail    String?
+  createdAt DateTime @default(now())
+}
+
+model Examinee {
+  id        String   @id @default(cuid())
+  name String
+  email String
+  program String
+  institution String
+  status String
+  registeredAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  examSessions ExamSession[]
+  questions Question[]
+  verbalResponses VerbalResponse[]
+  authenticityFindings AuthenticityFinding[]
+  submissionRecords SubmissionRecord[]
+  inconsistencyFlags InconsistencyFlag[]
+  proctorNotes ProctorNote[]
+  scoreReports ScoreReport[]
+  appeals Appeal[]
+  examBlueprints ExamBlueprint[]
+  institutionPrograms InstitutionProgram[]
+}
+
+model ExamSession {
+  id        String   @id @default(cuid())
+  subject String
+  examiner String
+  status String
+  scheduledAt DateTime?
+  durationMinutes Int
+  authenticityScore Float
+  examineeId String?
+  examinee Examinee? @relation(fields: [examineeId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Question {
+  id        String   @id @default(cuid())
+  body String
+  topic String
+  difficulty String
+  probingDepth String
+  status String
+  askedAt DateTime?
+  examineeId String?
+  examinee Examinee? @relation(fields: [examineeId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerbalResponse {
+  id        String   @id @default(cuid())
+  questionRef String
+  transcript String
+  score Float
+  confidence String
+  status String
+  latencySeconds Int
+  examineeId String?
+  examinee Examinee? @relation(fields: [examineeId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AuthenticityFinding {
+  id        String   @id @default(cuid())
+  kind String
+  evidence String
+  severity String
+  status String
+  submissionRef String
+  raisedAt DateTime?
+  examineeId String?
+  examinee Examinee? @relation(fields: [examineeId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SubmissionRecord {
+  id        String   @id @default(cuid())
+  title String
+  kind String
+  storageRef String
+  authoredClaim String
+  status String
+  submittedAt DateTime?
+  examineeId String?
+  examinee Examinee? @relation(fields: [examineeId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model InconsistencyFlag {
+  id        String   @id @default(cuid())
+  submissionRef String
+  verbalClaim String
+  writtenClaim String
+  severity String
+  status String
+  detail String
+  examineeId String?
+  examinee Examinee? @relation(fields: [examineeId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProctorNote {
+  id        String   @id @default(cuid())
+  proctor String
+  observation String
+  sessionRef String
+  status String
+  loggedAt DateTime?
+  action String?
+  examineeId String?
+  examinee Examinee? @relation(fields: [examineeId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ScoreReport {
+  id        String   @id @default(cuid())
+  sessionRef String
+  overallScore Float
+  authenticityScore Float
+  grade String
+  status String
+  publishedAt DateTime?
+  examineeId String?
+  examinee Examinee? @relation(fields: [examineeId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Appeal {
+  id        String   @id @default(cuid())
+  ground String
+  explanation String
+  status String
+  filedAt DateTime?
+  outcome String?
+  reviewedBy String?
+  examineeId String?
+  examinee Examinee? @relation(fields: [examineeId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ExamBlueprint {
+  id        String   @id @default(cuid())
+  subject String
+  topics String
+  difficultyMix String
+  passMark String
+  status String
+  questionCount Int
+  examineeId String?
+  examinee Examinee? @relation(fields: [examineeId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model InstitutionProgram {
+  id        String   @id @default(cuid())
+  institution String
+  program String
+  modality String
+  examPolicy String
+  status String
+  contact String
+  examineeId String?
+  examinee Examinee? @relation(fields: [examineeId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
