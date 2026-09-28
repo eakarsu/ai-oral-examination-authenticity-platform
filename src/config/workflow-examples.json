@@ -1,0 +1,98 @@
+{
+  "question-adapt": [
+    {
+      "id": "example-1",
+      "label": "Foundation follow-up",
+      "values": {
+        "subject": "Data interpretation",
+        "answersSummary": "Example respondent identified the trend but omitted uncertainty.",
+        "currentDifficulty": "Foundation",
+        "blueprint": "Assess interpretation, evidence use and limits; ask one follow-up at a time."
+      }
+    },
+    {
+      "id": "example-2",
+      "label": "Counterexample",
+      "values": {
+        "subject": "Operational decision-making",
+        "answersSummary": "Example respondent compared options and defended a trade-off.",
+        "currentDifficulty": "Intermediate",
+        "blueprint": "Assess counterexamples, constraints and justification; avoid authorship inference."
+      }
+    },
+    {
+      "id": "example-3",
+      "label": "Clarify an answer",
+      "values": {
+        "subject": "Written argument",
+        "answersSummary": "Example respondent could not explain a term used in the submission.",
+        "currentDifficulty": "Foundation",
+        "blueprint": "Ask for a concrete example before escalating difficulty; score with human anchors."
+      }
+    }
+  ],
+  "authenticity-audit": [
+    {
+      "id": "example-1",
+      "label": "Explain reasoning",
+      "values": {
+        "submissionClaims": "Example submission claims a controlled comparison of two workflows.",
+        "verbalResponses": "Example respondent explains the measurements but cannot describe the control group.",
+        "latencyPatterns": "Pauses vary from 2 to 12 seconds; timing alone is not authorship evidence.",
+        "topicGaps": "Control-group selection and confounding need follow-up questions."
+      }
+    },
+    {
+      "id": "example-2",
+      "label": "Topic gap",
+      "values": {
+        "submissionClaims": "Example submission uses a complex statistical term.",
+        "verbalResponses": "Example respondent gives a partial definition and one incorrect example.",
+        "latencyPatterns": "Two extended pauses; accommodation and context unknown.",
+        "topicGaps": "Ask a neutral clarification about assumptions; do not infer misconduct."
+      }
+    },
+    {
+      "id": "example-3",
+      "label": "Inconsistent detail",
+      "values": {
+        "submissionClaims": "Example submission describes three implementation stages.",
+        "verbalResponses": "Example respondent describes two stages and disputes a date in the document.",
+        "latencyPatterns": "Latency not recorded; no probability estimate is supported.",
+        "topicGaps": "Clarify version history and contribution boundaries with source evidence."
+      }
+    }
+  ],
+  "score-justify": [
+    {
+      "id": "example-1",
+      "label": "Consistent ratings",
+      "values": {
+        "scores": "Human ratings: reasoning 3/4, evidence 3/4, communication 4/4",
+        "findings": "Two reviewers cite the same example of a justified trade-off.",
+        "blueprint": "Use explicit 0–4 anchors and distinguish each competency.",
+        "appealRisk": "Low disagreement in this example; explain the appeal route without predicting outcomes."
+      }
+    },
+    {
+      "id": "example-2",
+      "label": "Reviewer disagreement",
+      "values": {
+        "scores": "Human ratings: reviewer A 2/4, reviewer B 4/4 on evidence use",
+        "findings": "Reviewers disagree about whether the cited source supports the conclusion.",
+        "blueprint": "Compare anchored criteria and exact response excerpts.",
+        "appealRisk": "Require reconciliation by an independent reviewer before a final decision."
+      }
+    },
+    {
+      "id": "example-3",
+      "label": "Missing observation",
+      "values": {
+        "scores": "Human ratings: reasoning 3/4; collaboration unassessed",
+        "findings": "No interaction was recorded for the collaboration criterion.",
+        "blueprint": "Unobserved criteria remain unassessed; do not impute a score.",
+        "appealRisk": "Document missing evidence and provide an opportunity for reassessment."
+      }
+    }
+  ]
+}

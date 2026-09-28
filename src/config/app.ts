@@ -47,7 +47,7 @@ export const pages: PageConfig[] = [
     href: "/results",
     description: "Score reports, appeals, proctor notes.",
     entities: ["ScoreReport", "Appeal", "ProctorNote"],
-    workflows: [],
+    workflows: ["score-justify"],
   },
   {
     label: "Programs",
@@ -124,21 +124,21 @@ export const entities: Record<string, EntityConfig> = {
 export const workflows: WorkflowConfig[] = [
   {
     slug: "question-adapt",
-    title: "Adaptive Question Selector",
+    title: "Draft: Adaptive Question Selector",
     description: "Choose the next oral exam question.",
     prompt: "You are an oral examiner. Given the answer history, pick the next adaptive question to maximize discrimination of genuine understanding.",
     fields: ["subject", "answersSummary", "currentDifficulty", "blueprint"],
   },
   {
     slug: "authenticity-audit",
-    title: "Authenticity Auditor",
+    title: "Draft: Authenticity Auditor",
     description: "Compare written submission to verbal performance.",
-    prompt: "You are an academic integrity officer. Compare the written submission claims to verbal responses; score the likelihood the candidate authored the work.",
+    prompt: "Compare supplied submission claims with the recorded responses and cite concrete discrepancies. Do not infer authorship probability or claim that inconsistency proves misconduct.",
     fields: ["submissionClaims", "verbalResponses", "latencyPatterns", "topicGaps"],
   },
   {
     slug: "score-justify",
-    title: "Score Justifier",
+    title: "Draft: Score Justifier",
     description: "Write the defensible score rationale.",
     prompt: "You are a chief examiner. Write a defensible rationale for the final score and authenticity finding, citing the evidence trail.",
     fields: ["scores", "findings", "blueprint", "appealRisk"],
